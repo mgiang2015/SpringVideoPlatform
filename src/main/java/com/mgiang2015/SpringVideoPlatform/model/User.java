@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
     @CreatedDate
     private Date createdDate;
     @LastModifiedDate
@@ -23,8 +23,8 @@ public class User {
     
     private String email;
     private String password;    // to hash and salt later
-    private boolean isCreator;
-    
+    private boolean isCreator = false;
+
     public Long getId() {
         return id;
     }

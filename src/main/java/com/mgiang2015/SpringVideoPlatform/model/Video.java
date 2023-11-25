@@ -8,9 +8,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "videos")
 public class Video {
     @Id
     @GeneratedValue
@@ -19,8 +20,6 @@ public class Video {
     private Date createdDate;
     @LastModifiedDate
     private Date lastModifiedDate;
-    @ManyToOne
-    private User creator;
 
     private String url;
     private String name;
@@ -43,12 +42,12 @@ public class Video {
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
-    public User getCreator() {
-        return creator;
-    }
-    public void setCreator(User creator) {
-        this.creator = creator;
-    }
+    // public User getCreator() {
+    //     return creator;
+    // }
+    // public void setCreator(User creator) {
+    //     this.creator = creator;
+    // }
     public String getUrl() {
         return url;
     }
