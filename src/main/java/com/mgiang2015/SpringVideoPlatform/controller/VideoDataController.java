@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mgiang2015.SpringVideoPlatform.controller.services.VideoService;
+import com.mgiang2015.SpringVideoPlatform.services.VideoService;
 import com.mgiang2015.SpringVideoPlatform.model.VideoData;
 
 import jakarta.servlet.http.HttpServletResponse;
