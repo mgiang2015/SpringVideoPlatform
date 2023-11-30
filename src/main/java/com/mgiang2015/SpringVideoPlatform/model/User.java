@@ -2,8 +2,8 @@ package com.mgiang2015.SpringVideoPlatform.model;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,10 +16,10 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    @CreatedDate
-    private Date createdDate;
-    @LastModifiedDate
-    private Date lastModifiedDate;
+    @CreationTimestamp
+    private Date createdAt;
+    @UpdateTimestamp
+    private Date lastModifiedAt;
     
     private String email;
     private String password;    // to hash and salt later
@@ -32,18 +32,24 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
     public String getEmail() {
         return email;
     }
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public void setLastModifiedAt(Date lastModifiedAt) {
+        this.lastModifiedAt = lastModifiedAt;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
