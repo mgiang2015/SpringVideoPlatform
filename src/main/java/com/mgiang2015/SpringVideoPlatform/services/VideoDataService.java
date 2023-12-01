@@ -17,7 +17,7 @@ import com.mongodb.DBObject;
 import com.mongodb.client.gridfs.model.GridFSFile;
 
 @Service
-public class VideoService {
+public class VideoDataService {
     
     @Autowired
     private GridFsTemplate gridFsTemplate;
