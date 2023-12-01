@@ -5,15 +5,28 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [fileUrl, setFileUrl] = useState("")
   useEffect(() => {
     // simple GET request
-    fetch("http://localhost:8080/users")
-      .then(response => response.json())
-      .then(data => console.log(data))
+    fetch("http://localhost:8080/videos/stream/6569ecca915fa5113771bf87")
+      .then((response) => response.blob()) // create object url for response
+      .then((blob) => {
+        blob = blob.slice(0, blob.size, "video/mp4")
+        console.log(blob);
+        return URL.createObjectURL(blob)
+      })
+      .then((url) => {
+        setFileUrl(url);
+        console.log("Done!")
+      })
   }, [])
 
   return (
     <>
+      <video controls width="100%">
+        <source src={fileUrl} type="video/mp4"/>
+      </video>
+      <p>{fileUrl}</p>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
