@@ -6,8 +6,9 @@ import {
 } from "react-router-dom";
 import App from './App.jsx'
 import Browse from './pages/Browse.jsx'
-import './index.css'
 import Watch from './pages/Watch.jsx';
+import Layout from './Layout.jsx';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <CssBaseline />
+    <Layout>
+      <RouterProvider router={router} />
+    </Layout>
   </React.StrictMode>,
 )

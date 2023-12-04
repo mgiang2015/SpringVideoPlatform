@@ -4,7 +4,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -32,11 +31,12 @@ export default function Browse() {
     ])
     return (
         <main>
-            <CssBaseline />
             {/* Hero unit */}
             <Box
             sx={{
                 bgcolor: 'background.paper',
+                pt: 8,
+                pb: 6,
             }}
             >
                 <Container maxWidth="sm">
