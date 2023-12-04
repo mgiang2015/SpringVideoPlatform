@@ -13,19 +13,7 @@ import Container from '@mui/material/Container';
 export default function Browse() {
     const [cards, setCards] = React.useState([
         {
-            id: 1,
-            name: "The rock",
-        },{
-            id: 2,
-            name: "The rock",
-        },{
-            id: 3,
-            name: "The rock",
-        },{
-            id: 4,
-            name: "The rock",
-        },{
-            id: 5,
+            id: "6569ecca915fa5113771bf87",
             name: "The rock",
         }
     ])
@@ -78,7 +66,7 @@ export default function Browse() {
                                     pt: '56.25%',
                                     }}
                                 />
-                                <CardActionArea href='#'>
+                                <CardActionArea href={`/watch/${card.id}`}>
                                 <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography gutterBottom>
                                     {card.name}
