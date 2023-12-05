@@ -8,6 +8,7 @@ export default function Layout({ children }) {
                 <Toolbar>
                     <Button disableElevation variant='contained' sx={{ m: 1 }} href='/'>Home</Button>
                     <Button disableElevation variant='contained' sx={{ m: 1 }} href='/browse'>Browse</Button>
+                    <Button disableElevation variant='contained' sx={{ m: 1 }} href='/upload'>Upload</Button>
                 </Toolbar>
             </AppBar>
             <main>{ children }</main> 
