@@ -17,7 +17,7 @@ import com.mongodb.DBObject;
 import com.mongodb.client.gridfs.model.GridFSFile;
 
 @Service
-public class VideoDataService {
+public class VideoMongodbService {
     
     @Autowired
     private GridFsTemplate gridFsTemplate;
@@ -40,5 +40,9 @@ public class VideoDataService {
         videoData.setTitle(file.getMetadata().get("title").toString());
         videoData.setStream(operations.getResource(file).getInputStream());
         return videoData;
+    }
+
+    public void deleteVideo(String id) {
+        gridFsTemplate.delete(new Query(Criteria.where("_id").is(id)));
     }
 }

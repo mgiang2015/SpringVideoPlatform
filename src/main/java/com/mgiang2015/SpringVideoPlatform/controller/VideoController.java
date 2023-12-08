@@ -1,24 +1,35 @@
 package com.mgiang2015.SpringVideoPlatform.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mgiang2015.SpringVideoPlatform.repository.VideoRepository;
+import com.mgiang2015.SpringVideoPlatform.services.VideoMongodbService;
+
+import jakarta.servlet.http.HttpServletResponse;
+
 import com.mgiang2015.SpringVideoPlatform.exception.VideoNotFoundException;
 import com.mgiang2015.SpringVideoPlatform.model.Video;
+import com.mgiang2015.SpringVideoPlatform.model.VideoData;
 
 @RestController
 public class VideoController {
     @Autowired
     private VideoRepository repository;
+    @Autowired
+    private VideoMongodbService service;
 
     @GetMapping("/videos")
     public List<Video> all() {
@@ -26,7 +37,11 @@ public class VideoController {
     }
 
     @PostMapping("/videos")
-    public Video newVideo(@RequestBody Video newVideo) {
+    public Video newVideo(@RequestParam("video") Video newVideo, @RequestParam("file") MultipartFile file) throws IOException {
+        String id = service.addVideo(newVideo.getName(), file);
+
+        // Set generatedId to newVideo id
+
         return repository.save(newVideo);
     }
 
@@ -34,6 +49,13 @@ public class VideoController {
     public Video one(@PathVariable Long id) {
         return repository.findById(id)
         .orElseThrow(() -> new VideoNotFoundException(id));
+    }
+    
+    @GetMapping("/videos/stream/{id}")
+    public void streamVideo(@PathVariable String id, HttpServletResponse response) throws IOException {
+        VideoData data = service.getVideo(id);
+        response.addHeader("Content-Type", "video/mp4");
+        FileCopyUtils.copy(data.getStream(), response.getOutputStream());
     }
 
     @PutMapping("/videos/{id}")
@@ -52,6 +74,8 @@ public class VideoController {
 
     @DeleteMapping("/videos/{id}")
     public void deleteVideo(@PathVariable Long id) {
+        // Delete from mongodb first
+        // service.deleteVideo(id); // Uncomment after changing data structure of video
         repository.deleteById(id);
     }
 }
