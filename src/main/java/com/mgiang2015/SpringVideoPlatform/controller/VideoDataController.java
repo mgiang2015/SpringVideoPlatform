@@ -37,6 +37,7 @@ public class VideoDataController {
     @GetMapping("/videos/stream/{id}")
     public void streamVideo(@PathVariable String id, HttpServletResponse response) throws IOException {
         VideoData data = service.getVideo(id);
+        response.addHeader("Content-Type", "video/mp4");
         FileCopyUtils.copy(data.getStream(), response.getOutputStream());
     }
 }
