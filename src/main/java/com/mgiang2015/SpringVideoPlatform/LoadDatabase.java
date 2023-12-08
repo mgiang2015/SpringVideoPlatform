@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.mgiang2015.SpringVideoPlatform.model.User;
 import com.mgiang2015.SpringVideoPlatform.repository.UserRepository;
-import com.mgiang2015.SpringVideoPlatform.repository.VideoRepository;
 
 @Configuration
 public class LoadDatabase {
@@ -29,13 +28,6 @@ public class LoadDatabase {
             log.info("Preloading " + userRepo.save(giang));
             log.info("Preloading " + userRepo.save(phuc));
 
-        };
-    }
-
-    @Bean
-    CommandLineRunner initVideoDb(VideoRepository videoRepo) {
-        return args -> {
-            // no longer requires pre-loading
         };
     }
 }
