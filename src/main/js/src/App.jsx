@@ -8,9 +8,6 @@ function App() {
 
   return (
     <>
-      <video controls width="100%">
-        <source src={"http://localhost:8080/videos/stream/6569ecca915fa5113771bf87"} type="video/mp4"/>
-      </video>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

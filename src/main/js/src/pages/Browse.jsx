@@ -11,12 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 export default function Browse() {
-    const [cards, setCards] = React.useState([
-        {
-            id: "6569ecca915fa5113771bf87",
-            name: "The rock",
-        }
-    ])
+    const [cards, setCards] = React.useState([])
     return (
         <main>
             {/* Hero unit */}
