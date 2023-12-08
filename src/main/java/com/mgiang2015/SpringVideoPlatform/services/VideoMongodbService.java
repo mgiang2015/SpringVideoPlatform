@@ -25,19 +25,17 @@ public class VideoMongodbService {
     @Autowired
     private GridFsOperations operations;
     
-    public String addVideo(String title, MultipartFile file) throws IOException {
+    public String addVideo(MultipartFile file) throws IOException {
         DBObject metaData = new BasicDBObject();
         metaData.put("type", "video");
-        metaData.put("title", title);
         metaData.put("fileSize", file.getSize());
-        ObjectId id = gridFsTemplate.store(file.getInputStream(), file.getName(), file.getContentType(), metaData);
+        ObjectId id = gridFsTemplate.store(file.getInputStream(), file.getContentType(), metaData);
         return id.toString();
     }
 
     public VideoData getVideo(String id) throws IllegalStateException, IOException {
         GridFSFile file = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(id)));
         VideoData videoData = new VideoData();
-        videoData.setTitle(file.getMetadata().get("title").toString());
         videoData.setStream(operations.getResource(file).getInputStream());
         return videoData;
     }

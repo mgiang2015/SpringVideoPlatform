@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.mgiang2015.SpringVideoPlatform.model.Video;
 
 @Repository
-public interface VideoRepository extends JpaRepository<Video, Long> {
+public interface VideoRepository extends JpaRepository<Video, String> {
     
 }
