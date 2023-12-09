@@ -75,4 +75,13 @@ public class VideoController {
         service.deleteVideo(id);
         repository.deleteById(id);
     }
+
+    @DeleteMapping("/videos/all")
+    public void deleteAllVideos() {
+        List<Video> allVideos = repository.findAll();
+        for (Video video : allVideos) {
+            service.deleteVideo(video.getId());
+            repository.deleteById(video.getId());
+        }
+    }
 }
