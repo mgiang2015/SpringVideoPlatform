@@ -12,7 +12,7 @@ export default function Upload() {
         let formData = new FormData();
         formData.append('title', title);
         formData.append('file', file);
-        axios.post('http://localhost:8080/videos/add', formData, {
+        axios.post('http://localhost:8080/videos', formData, {
             onUploadProgress: (progressEvent) => {
                 const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                 setUploadProgress(percentCompleted);
