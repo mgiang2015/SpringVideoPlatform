@@ -14,20 +14,19 @@ public class LoadDatabase {
     
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
-    @Bean
-    CommandLineRunner initUserDb(UserRepository userRepo) {
-        return args -> {
-            User giang = new User();
-            giang.setEmail("giang@gmail.com");
-            giang.setPassword("giang");
+    // @Bean // We don't need this with persisting mysql database
+    // CommandLineRunner initUserDb(UserRepository userRepo) {
+    //     return args -> {
+    //         User giang = new User();
+    //         giang.setEmail("giang@gmail.com");
+    //         giang.setPassword("giang");
+    //         log.info("Preloading " + userRepo.save(giang));
 
-            User phuc = new User();
-            phuc.setEmail("phuc@gmail.com");
-            phuc.setPassword("phuc");
+    //         User phuc = new User();
+    //         phuc.setEmail("phuc@gmail.com");
+    //         phuc.setPassword("phuc");
+    //         log.info("Preloading " + userRepo.save(phuc));
 
-            log.info("Preloading " + userRepo.save(giang));
-            log.info("Preloading " + userRepo.save(phuc));
-
-        };
-    }
+    //     };
+    // }
 }
