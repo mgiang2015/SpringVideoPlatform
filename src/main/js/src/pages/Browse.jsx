@@ -9,9 +9,29 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import axios from 'axios';
 
 export default function Browse() {
     const [cards, setCards] = React.useState([])
+    React.useEffect(() => {
+        axios.get('http://localhost:8080/videos')
+        .then(res => {
+            console.log(res.data);
+            const newCards = res.data;
+            setCards(newCards);
+        })
+    }, [])
+
+    const handleDeleteVideo = (event, id) => {
+        axios.delete(`http://localhost:8080/videos/${id}`)
+        .then(res => {
+            console.log(res);
+        })
+
+        const newCards = cards.filter((card) => card.id != id);
+        setCards(newCards);
+    }
+
     return (
         <main>
             {/* Hero unit */}
@@ -64,10 +84,14 @@ export default function Browse() {
                                 <CardActionArea href={`/watch/${card.id}`}>
                                 <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography gutterBottom>
-                                    {card.name}
+                                    {card.title}
                                     </Typography>
                                 </CardContent>
                                 </CardActionArea>
+                                <Container>
+                                    <Button onClick={event => handleDeleteVideo(event, card.id)}>Delete</Button>
+                                    <Button href={`/edit/${card.id}`}>Edit</Button>
+                                </Container>
                             </Card>
                         </Grid>
                     ))}

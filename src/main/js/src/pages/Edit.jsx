@@ -1,18 +1,25 @@
 import { Button, Container, Input, TextField, Typography, LinearProgress } from '@mui/material';
-import React, { useState } from 'react';
 import axios from 'axios'
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export default function Upload() {
+export default function Edit() {
     const [title, setTitle] = useState("");
-    const [file, setFile] = useState(null);
-    const [uploadProgress, setUploadProgress] = React.useState(0);
+    const [uploadProgress, setUploadProgress] = useState(0);
+    let { id } = useParams();
+    const [oldTitle, setOldTitle] = useState("");
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/videos/${id}`)
+        .then(res => {
+            console.log(res.data);
+            setOldTitle(res.data.title);
+        })
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let formData = new FormData();
-        formData.append('title', title);
-        formData.append('file', file);
-        axios.post('http://localhost:8080/videos', formData, {
+        axios.put(`http://localhost:8080/videos/${id}`, { title }, {
             onUploadProgress: (progressEvent) => {
                 const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
                 setUploadProgress(percentCompleted);
@@ -28,13 +35,12 @@ export default function Upload() {
 
     return (
         <Container maxWidth="xl" sx={{ mt: 5 }}>
-            <Typography gutterBottom variant='h4'>Upload video</Typography>
+            <Typography gutterBottom variant='h4'>{`Update video ${oldTitle}`}</Typography>
             <form onSubmit={handleSubmit}>
                 <Container sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <TextField required label="Video title" placeholder='Your title here' onChange={(e) => setTitle(e.target.value)} sx={{ m: 2 }} />
-                    <Input required type='file' onChange={(e) => setFile(e.target.files[0])} sx={{ m: 2 }} />
+                    <TextField required label="Updated title" placeholder='Updated title here' onChange={(e) => setTitle(e.target.value)} sx={{ m: 2 }} />
                     <Button type='submit' sx={{ m: 2 }}>
-                        Upload
+                        Update
                     </Button>
                 </Container>
             </form>

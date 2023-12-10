@@ -10,6 +10,7 @@ import Watch from './pages/Watch.jsx';
 import Layout from './Layout.jsx';
 import CssBaseline from '@mui/material/CssBaseline';
 import Upload from './pages/Upload.jsx';
+import Edit from './pages/Edit.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,9 @@ const router = createBrowserRouter([
   },{
     path: "/upload",
     element: <Upload />
+  }, {
+    path: "/edit/:id",
+    element: <Edit />,    
   }
 ]);
 
