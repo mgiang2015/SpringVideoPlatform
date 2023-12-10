@@ -21,6 +21,17 @@ export default function Browse() {
             setCards(newCards);
         })
     }, [])
+
+    const handleDeleteVideo = (event, id) => {
+        axios.delete(`http://localhost:8080/videos/${id}`)
+        .then(res => {
+            console.log(res);
+        })
+
+        const newCards = cards.filter((card) => card.id != id);
+        setCards(newCards);
+    }
+
     return (
         <main>
             {/* Hero unit */}
@@ -77,6 +88,7 @@ export default function Browse() {
                                     </Typography>
                                 </CardContent>
                                 </CardActionArea>
+                                <Button onClick={event => handleDeleteVideo(event, card.id)}>Delete</Button>
                             </Card>
                         </Grid>
                     ))}
