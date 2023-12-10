@@ -88,7 +88,10 @@ export default function Browse() {
                                     </Typography>
                                 </CardContent>
                                 </CardActionArea>
-                                <Button onClick={event => handleDeleteVideo(event, card.id)}>Delete</Button>
+                                <Container>
+                                    <Button onClick={event => handleDeleteVideo(event, card.id)}>Delete</Button>
+                                    <Button href={`/edit/${card.id}`}>Edit</Button>
+                                </Container>
                             </Card>
                         </Grid>
                     ))}
