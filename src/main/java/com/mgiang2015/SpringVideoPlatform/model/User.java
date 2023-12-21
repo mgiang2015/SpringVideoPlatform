@@ -22,8 +22,9 @@ public class User {
     private Date lastModifiedAt;
     
     private String email;
-    private String password;    // to hash and salt later
-    private boolean isCreator = false;
+    private byte[] salt;
+    private byte[] hashedPassword;
+    private String role;
 
     public Long getId() {
         return id;
@@ -32,37 +33,45 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+    
     public String getEmail() {
         return email;
     }
+    
     public Date getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
+    
     public Date getLastModifiedAt() {
         return lastModifiedAt;
     }
-
-    public void setLastModifiedAt(Date lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
-    }
-
+    
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getPassword() {
-        return password;
+
+    public byte[] getSalt() {
+        return salt;
     }
-    public void setPassword(String password) {
-        this.password = password;
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
-    public boolean isCreator() {
-        return isCreator;
+
+    public byte[] getHashedPassword() {
+        return hashedPassword;
     }
-    public void setCreator(boolean isCreator) {
-        this.isCreator = isCreator;
+
+    public void setHashedPassword(byte[] hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
 }
