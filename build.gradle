@@ -26,6 +26,11 @@ dependencies {
 	// for auth0
 	implementation 'com.okta.spring:okta-spring-boot-starter:3.0.5'
 
+	// For reading .env files
+	// https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv
+	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+
+	
 	// runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

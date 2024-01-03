@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mgiang2015.SpringVideoPlatform.model.User;
 import com.mgiang2015.SpringVideoPlatform.repository.UserRepository;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,15 +35,15 @@ public class AuthController {
     private String successAudience;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginReturnValue> login(@RequestParam(name = "email") String email, 
-                        @RequestParam(name = "password") String password) throws NoSuchAlgorithmException {
+    public ResponseEntity<String> login(@RequestParam(name = "email") String email, 
+                        @RequestParam(name = "password") String password) throws NoSuchAlgorithmException, IOException, InterruptedException {
         
         List<User> userByEmail = userRepository.findAll().stream()
                                 .filter(user -> user.getEmail().equals(email))
                                 .toList();
 
         if (userByEmail.isEmpty()) {
-            return ResponseEntity.badRequest().body(new LoginReturnValue());
+            return ResponseEntity.badRequest().body("Fail");
         }
 
         // Match hashed password
@@ -48,40 +53,22 @@ public class AuthController {
         byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
         
         if (Arrays.equals(hashedPassword, user.getHashedPassword())) {
-            return ResponseEntity.ok().body(new LoginReturnValue(successIssuer, successAudience));
+            // call auth0 for token
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(successIssuer))
+                .header("content-type", "application/x-www-form-urlencoded")
+                .POST(HttpRequest.BodyPublishers.ofString("grant_type=client_credentials&client_id=CLIENT_ID_VALUE&client_secret=CLIENT_SECRET_VALUE&audience=AUDIENCE_VALUE_FROM_APPLICATIONPROPERTIES"))
+                .build();
+            
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return ResponseEntity.ok().body(response.body());
         } else {
-            return ResponseEntity.badRequest().body(new LoginReturnValue());
+            return ResponseEntity.badRequest().body("Fail");
         }
     }
 }
 
-class LoginReturnValue {
-    private String issuer;
-    private String audience;
-
-    public LoginReturnValue() {
-        this.issuer = "";
-        this.audience = "";
-    }
-
-    public LoginReturnValue(String issuer, String audience) {
-        this.issuer = issuer;
-        this.audience = audience;
-    }
-
-    public String getIssuer() {
-        return issuer;
-    }
-
-    public String getAudience() {
-        return audience;
-    }
-
-    public void setIssuer(String issuer) {
-        this.issuer = issuer;
-    }
-
-    public void setAudience(String audience) {
-        this.audience = audience;
-    }
+class DotEnvReader {
+    // TODO: IMPLEMENT DOTENV READER HERE
 }
