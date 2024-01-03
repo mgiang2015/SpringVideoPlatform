@@ -12,9 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 public class AuthController {
@@ -22,8 +23,14 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
+    @Value("${okta.oauth2.issuer}")
+    private String successIssuer;
+
+    @Value("${okta.oauth2.audience}")
+    private String successAudience;
+
     @PostMapping("/login")
-    public String login(@RequestParam(name = "email") String email, 
+    public ResponseEntity<LoginReturnValue> login(@RequestParam(name = "email") String email, 
                         @RequestParam(name = "password") String password) throws NoSuchAlgorithmException {
         
         List<User> userByEmail = userRepository.findAll().stream()
@@ -31,7 +38,7 @@ public class AuthController {
                                 .toList();
 
         if (userByEmail.isEmpty()) {
-            return "Unsuccessful. No user with provided email is found";
+            return ResponseEntity.badRequest().body(new LoginReturnValue());
         }
 
         // Match hashed password
@@ -41,10 +48,40 @@ public class AuthController {
         byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
         
         if (Arrays.equals(hashedPassword, user.getHashedPassword())) {
-            return "Login successful!"; // return a token or something
+            return ResponseEntity.ok().body(new LoginReturnValue(successIssuer, successAudience));
         } else {
-            return "Unsuccesssful, wrong password provided";
+            return ResponseEntity.badRequest().body(new LoginReturnValue());
         }
     }
-    
+}
+
+class LoginReturnValue {
+    private String issuer;
+    private String audience;
+
+    public LoginReturnValue() {
+        this.issuer = "";
+        this.audience = "";
+    }
+
+    public LoginReturnValue(String issuer, String audience) {
+        this.issuer = issuer;
+        this.audience = audience;
+    }
+
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public String getAudience() {
+        return audience;
+    }
+
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
+    }
+
+    public void setAudience(String audience) {
+        this.audience = audience;
+    }
 }
