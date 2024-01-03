@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mgiang2015.SpringVideoPlatform.model.User;
 import com.mgiang2015.SpringVideoPlatform.repository.UserRepository;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -56,9 +58,9 @@ public class AuthController {
             // call auth0 for token
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(successIssuer))
+                .uri(URI.create(successIssuer + "oauth/token"))
                 .header("content-type", "application/x-www-form-urlencoded")
-                .POST(HttpRequest.BodyPublishers.ofString("grant_type=client_credentials&client_id=CLIENT_ID_VALUE&client_secret=CLIENT_SECRET_VALUE&audience=AUDIENCE_VALUE_FROM_APPLICATIONPROPERTIES"))
+                .POST(HttpRequest.BodyPublishers.ofString(String.format("grant_type=client_credentials&client_id=%s&client_secret=%s&audience=%s", DotEnvReader.getClientId(), DotEnvReader.getClientSecret(), successAudience)))
                 .build();
             
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -70,5 +72,14 @@ public class AuthController {
 }
 
 class DotEnvReader {
-    // TODO: IMPLEMENT DOTENV READER HERE
+
+    private static final Dotenv READER = Dotenv.load();
+
+    public static String getClientId() {
+        return READER.get("SPRINGBOOT_AUTH0_CLIENT_ID");
+    }
+
+    public static String getClientSecret() {
+        return READER.get("SPRINGBOOT_AUTH0_CLIENT_SECRET");
+    }
 }
