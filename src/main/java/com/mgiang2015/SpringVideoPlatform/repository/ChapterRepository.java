@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.mgiang2015.SpringVideoPlatform.model.Chapter;
 
 @Repository
-public interface ChapterRepository extends JpaRepository<Chapter, String> {
+public interface ChapterRepository extends JpaRepository<Chapter, Long> {
     
 }
