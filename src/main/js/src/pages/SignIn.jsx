@@ -17,9 +17,6 @@ import { useCookies } from 'react-cookie'
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-const clientSecret = process.env.REACT_APP_AUTH0_CLIENT_SECRET;
-const grantType = process.env.REACT_APP_AUTH0_GRANT_TYPE;
 
 export default function SignIn() {
     const [error, setError] = React.useState(null);
