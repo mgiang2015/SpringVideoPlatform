@@ -22,7 +22,31 @@ public class Category {
     private Date lastModifiedAt;
 
     private String title;
-    
+        
     // One to Many
     // Course[] courses
+
+    public Long getId() {
+        return id;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
