@@ -1,13 +1,18 @@
 package com.mgiang2015.SpringVideoPlatform.model;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,15 +31,18 @@ public class Course {
     private String imgUrl; // course thumbnail
     private Float price;
     private boolean isPublished;
+
+    // Unidirectional OneToMany relationship
+    @OneToMany(orphanRemoval = true) // cascade delete
+    @JoinColumn(name = "course_id") // join column will be in chapters table
+    private Collection<Chapter> chapters;
     
-    // // Many to One - One Category can have many courses
-    // Category
+    // Bidirectional ManyToOne relationship
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Category category;
     
     // // Many to One - One creator can create many courses
     // User creator
-
-    // One to Many - One Course can have many videos / chapters
-    // Video[]
 
     public Long getId() {
         return id;
@@ -77,6 +85,12 @@ public class Course {
     }
     public void setPublished(boolean isPublished) {
         this.isPublished = isPublished;
+    }
+    public Collection<Chapter> getChapters() {
+        return chapters;
+    }
+    public void setChapters(Collection<Chapter> chapters) {
+        this.chapters = chapters;
     }
 
 }
