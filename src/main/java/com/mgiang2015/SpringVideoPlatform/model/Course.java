@@ -86,6 +86,9 @@ public class Course {
     public void setPublished(boolean isPublished) {
         this.isPublished = isPublished;
     }
+    public boolean getPublished() {
+        return isPublished;
+    }
     public Collection<Chapter> getChapters() {
         return chapters;
     }
