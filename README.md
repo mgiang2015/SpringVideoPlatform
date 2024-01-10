@@ -17,20 +17,26 @@ This application is a full-stack LMS, built with Spring Boot framework for backe
 
 ### Frontend
 
-<img src="docs/logos/ReactJS.png" alt="ReactJS" width="50"/>
-<img src="docs/logos/Vite.png" alt="Vite" width="50"/>
-<img src="docs/logos/Mui.png" alt="Material UI" width="50"/>
+<p float="left">
+    <img src="docs/logos/ReactJS.png" alt="ReactJS" width="50"/>
+    <img src="docs/logos/Vite.png" alt="Vite" width="50"/>
+    <img src="docs/logos/Mui.png" alt="Material UI" width="50"/>
+</p>
 
 ### Backend
 
-<img src="docs/logos/Java.png" alt="Java" width="75"/>
-<img src="docs/logos/SpringBoot.png" alt="Spring Boot" width="100"/>
-<img src="docs/logos/Auth0.png" alt="Auth0" width="100"/>
+<p float="left">
+    <img src="docs/logos/Java.png" alt="Java" width="75"/>
+    <img src="docs/logos/SpringBoot.png" alt="Spring Boot" width="100"/>
+    <img src="docs/logos/Auth0.png" alt="Auth0" width="100"/>
+</p>
 
 ### Database
 
-<img src="docs/logos/MongoDB.png" alt="MongoDB" width="100"/>
-<img src="docs/logos/MySQL.png" alt="MySQL" width="100"/>
+<p float="left">
+    <img src="docs/logos/MongoDB.png" alt="MongoDB" width="100"/>
+    <img src="docs/logos/MySQL.png" alt="MySQL" width="100"/>
+</p>
 
 ## Installation
 
