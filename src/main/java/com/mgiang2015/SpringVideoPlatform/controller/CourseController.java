@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mgiang2015.SpringVideoPlatform.exception.ChapterNotFoundException;
 import com.mgiang2015.SpringVideoPlatform.exception.CourseNotFoundException;
+import com.mgiang2015.SpringVideoPlatform.model.Chapter;
 import com.mgiang2015.SpringVideoPlatform.model.Course;
+import com.mgiang2015.SpringVideoPlatform.repository.ChapterRepository;
 import com.mgiang2015.SpringVideoPlatform.repository.CourseRepository;
 
 
@@ -22,11 +25,14 @@ import com.mgiang2015.SpringVideoPlatform.repository.CourseRepository;
 @RestController
 public class CourseController {
     @Autowired
-    private CourseRepository repository;
+    private CourseRepository courseRepository;
+
+    @Autowired
+    private ChapterRepository chapterRepository;
 
     @GetMapping("/courses")
     public List<Course> all() {
-        return repository.findAll();
+        return courseRepository.findAll();
     }
     
     @PostMapping("/courses")
@@ -35,34 +41,61 @@ public class CourseController {
         Course course = new Course();
         course.setTitle(title);
 
-        return repository.save(course);
+        return courseRepository.save(course);
     }
     
     @GetMapping("/courses/{id}")
     public Course one(@PathVariable Long id) {
-        return repository.findById(id)
+        return courseRepository.findById(id)
         .orElseThrow(() -> new CourseNotFoundException(id));
     }
 
     @PutMapping("courses/{id}")
     public Course replaceCourse(@PathVariable Long id, @RequestBody Course newCourse) {
-        return repository.findById(id)
+        return courseRepository.findById(id)
         .map(course -> {
             course.setTitle(newCourse.getTitle());
             course.setDescription(newCourse.getDescription());
             course.setImgUrl(newCourse.getImgUrl());
             course.setPrice(newCourse.getPrice());
             course.setPublished(newCourse.getPublished());;
-            return repository.save(course);
+            return courseRepository.save(course);
+        }).orElseThrow(() -> new CourseNotFoundException(id));
+    }
+
+    @PutMapping("courses/{id}/chapters")
+    public Course uploadChapter(@PathVariable Long id,
+                @RequestParam("chapterId") Long chapterId) {
+        
+        Chapter chapter = chapterRepository.findById(chapterId)
+        .orElseThrow(() -> new ChapterNotFoundException(chapterId));
+
+        return courseRepository.findById(id)
+        .map(course -> {
+            course.addChapter(chapter);
+            return courseRepository.save(course);
+        }).orElseThrow(() -> new CourseNotFoundException(id));
+    }
+
+    @DeleteMapping("courses/{id}/chapters")
+    public Course deleteChapter(@PathVariable Long id,
+                @RequestParam("chapterId") Long chapterId) {
+        
+        // Assume that chapter is already gone in "chapters" table
+        
+        return courseRepository.findById(id)
+        .map(course -> {
+            course.removeChapterById(chapterId);
+            return courseRepository.save(course);
         }).orElseThrow(() -> new CourseNotFoundException(id));
     }
 
     @DeleteMapping("courses/{id}")
     public void deleteCourse(@PathVariable Long id) throws IOException {
-        Course course = repository.findById(id)
+        Course course = courseRepository.findById(id)
             .orElseThrow(() -> new CourseNotFoundException(id));
         
         // Delete
-        repository.deleteById(id);
+        courseRepository.deleteById(course.getId());
     }
 }

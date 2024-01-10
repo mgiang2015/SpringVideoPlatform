@@ -1,7 +1,8 @@
 package com.mgiang2015.SpringVideoPlatform.model;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -27,15 +28,15 @@ public class Course {
     private Date lastModifiedAt;
 
     private String title;
-    private String description;
-    private String imgUrl; // course thumbnail
-    private Float price;
-    private boolean isPublished;
+    private String description = "";
+    private String imgUrl = ""; // course thumbnail
+    private Float price = Float.valueOf(0);
+    private boolean isPublished = false;
 
     // Unidirectional OneToMany relationship
-    @OneToMany(orphanRemoval = true) // cascade delete
+    @OneToMany(cascade = CascadeType.ALL) // cascade delete
     @JoinColumn(name = "course_id") // join column will be in chapters table
-    private Collection<Chapter> chapters;
+    private List<Chapter> chapters = new ArrayList<>();
     
     // Bidirectional ManyToOne relationship
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -89,11 +90,20 @@ public class Course {
     public boolean getPublished() {
         return isPublished;
     }
-    public Collection<Chapter> getChapters() {
+    public List<Chapter> getChapters() {
         return chapters;
     }
-    public void setChapters(Collection<Chapter> chapters) {
+    public void setChapters(List<Chapter> chapters) {
         this.chapters = chapters;
     }
+    public void addChapter(Chapter chapter) {
+        this.chapters.add(chapter);
+    }
+    public void removeChapter(Chapter chapter) {
+        this.chapters.remove(chapter);
+    }
 
+    public void removeChapterById(Long chapterId) {
+        this.chapters.removeIf(chapter -> chapter.getId().equals(chapterId));
+    }
 }
