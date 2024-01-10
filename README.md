@@ -15,6 +15,23 @@ This application is a full-stack LMS, built with Spring Boot framework for backe
 
 ## Technologies Used
 
+### Frontend
+
+<img src="docs/logos/ReactJS.png" alt="ReactJS" width="50"/>
+<img src="docs/logos/Vite.png" alt="Vite" width="50"/>
+<img src="docs/logos/Mui.png" alt="Material UI" width="50"/>
+
+### Backend
+
+<img src="docs/logos/Java.png" alt="Java" width="75"/>
+<img src="docs/logos/SpringBoot.png" alt="Spring Boot" width="100"/>
+<img src="docs/logos/Auth0.png" alt="Auth0" width="100"/>
+
+### Database
+
+<img src="docs/logos/MongoDB.png" alt="MongoDB" width="100"/>
+<img src="docs/logos/MySQL.png" alt="MySQL" width="100"/>
+
 ## Installation
 
 ### Prerequisites
@@ -38,13 +55,13 @@ This application is a full-stack LMS, built with Spring Boot framework for backe
 
 #### Frontend
 
-1. Create a `.env` in the `/src/main/js` folder.
+1. Create a `.env` in the `./src/main/js` folder.
 
 2. Configure `REACT_APP_BACKEND_BASE_URL=http://localhost:8080`
 
 #### Backend
 
-1. Rename `example.application.properties` to `application.properties` in `/src/main/resources` folder.
+1. Rename `example.application.properties` to `application.properties` in `./src/main/resources` folder.
 
 2. Update values for `spring.datasource.url`, `spring.datasource.username` and `spring.datasource.password` fields.
 
@@ -58,7 +75,7 @@ Note: Please ensure that your MySQL and MongoDB servers are running.
 
 1. Navigate to root folder.
 
-2. Run `.\gradlew bootRun` to run the Spring Boot server. The server will be running at `http://localhost:8080`
+2. Run `./gradlew bootRun` to run the Spring Boot server. The server will be running at `http://localhost:8080`
 
 3. Note: You do not need gradle installed in your machine for this.
 
@@ -74,7 +91,15 @@ Note: Please ensure that your MySQL and MongoDB servers are running.
 
 ## API Documentation
 
+Work in progress. API Documentation will be recorded in `./docs/api.md`
+
 ## Acknowledgements
+
+[Build a Course & LMS Platform: Next 13, React, Stripe, Mux, Prisma, Tailwind, MySQL | Udemy Clone](https://www.youtube.com/watch?v=Big_aFLmekI)
+
+[Spring Guides on Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
+
+[Add authorization to a Spring Boot application](https://auth0.com/docs/quickstart/backend/java-spring-security5/interactive)
 
 ## Contact Information
 
