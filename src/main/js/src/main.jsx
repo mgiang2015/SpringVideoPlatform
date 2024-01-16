@@ -13,6 +13,7 @@ import Upload from './pages/Upload.jsx';
 import Edit from './pages/Edit.jsx';
 import { CookiesProvider } from 'react-cookie';
 import SignIn from './pages/SignIn.jsx';
+import CreateCourse from './pages/CreateCourse.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,9 @@ const router = createBrowserRouter([
   }, {
     path: "/signin",
     element: <SignIn />,    
+  }, {
+    path: "/courses/create",
+    element: <CreateCourse />
   }
 ]);
 
