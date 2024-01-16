@@ -14,6 +14,7 @@ import Edit from './pages/Edit.jsx';
 import { CookiesProvider } from 'react-cookie';
 import SignIn from './pages/SignIn.jsx';
 import CreateCourse from './pages/CreateCourse.jsx';
+import CourseEdit from './pages/CourseEdit.jsx';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,12 @@ const router = createBrowserRouter([
   }, {
     path: "/courses/create",
     element: <CreateCourse />
+  }, {
+    path: "/courses/:id",
+    element: <CreateCourse /> // actually is course content pls
+  }, {
+    path: "/courses/:id/edit",
+    element: <CourseEdit />
   }
 ]);
 
