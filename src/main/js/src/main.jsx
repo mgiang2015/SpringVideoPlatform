@@ -15,6 +15,7 @@ import { CookiesProvider } from 'react-cookie';
 import SignIn from './pages/SignIn.jsx';
 import CreateCourse from './pages/CreateCourse.jsx';
 import CourseEdit from './pages/CourseEdit.jsx';
+import CourseContent from './pages/CourseContent.jsx';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
     element: <CreateCourse />
   }, {
     path: "/courses/:id",
-    element: <CreateCourse /> // actually is course content pls
+    element: <CourseContent />
   }, {
     path: "/courses/:id/edit",
     element: <CourseEdit />
