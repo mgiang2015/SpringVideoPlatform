@@ -2,6 +2,7 @@ import { Box, Button, Container, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 
 export default function Layout({ children }) {
+    // Layout can also take in a "variant" prop. Change toolbar / sidebar accordingly
     return (
         <Box sx={{ width: "100vw", height: "100vh" }}>
             <AppBar position="relative" width="100%">
