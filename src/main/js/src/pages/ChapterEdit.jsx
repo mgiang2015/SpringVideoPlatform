@@ -8,8 +8,8 @@ export default function ChapterEdit() {
     return (
         <Box sx={{ display: "grid", gridTemplateColumns: "auto auto", gridGap: "1rem", padding: "2rem" }}>
                 <TextField label="Chapter title" />
-                <Box>
-                    <Input required type='file' onChange={(e) => setFile(e.target.files[0])} />
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <input required type='file' accept=".mp4" onChange={(e) => setFile(e.target.files[0])} />
                 </Box>
                 <TextField label="Chapter description" />
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
