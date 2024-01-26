@@ -44,16 +44,16 @@ const router = createBrowserRouter([
     path: "/courses/create",
     element: <CreateCourse />
   }, {
-    path: "/courses/:id",
+    path: "/courses/:courseId",
     element: <CourseContent />
   }, {
-    path: "/courses/:id/edit",
+    path: "/courses/:courseId/edit",
     element: <CourseEdit />
   }, {
-    path: "/chapters/:id/edit",
+    path: "/courses/:courseId/chapters/:chapterId/edit",
     element: <ChapterEdit />
   }, {
-    path: "/chapters/:id",
+    path: "/courses/:courseId/chapters/:chapterId",
     element: <ChapterContent />
   }
 ]);
