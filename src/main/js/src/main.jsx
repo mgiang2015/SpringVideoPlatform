@@ -17,6 +17,7 @@ import CreateCourse from './pages/CreateCourse.jsx';
 import CourseEdit from './pages/CourseEdit.jsx';
 import CourseContent from './pages/CourseContent.jsx';
 import ChapterEdit from './pages/ChapterEdit.jsx';
+import ChapterContent from './pages/ChapterContent.jsx';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,9 @@ const router = createBrowserRouter([
   }, {
     path: "/chapters/:id/edit",
     element: <ChapterEdit />
+  }, {
+    path: "/chapters/:id",
+    element: <ChapterContent />
   }
 ]);
 
