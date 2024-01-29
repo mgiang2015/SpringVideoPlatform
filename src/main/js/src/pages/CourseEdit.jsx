@@ -1,4 +1,4 @@
-import { Box, Checkbox, Button, InputLabel, TextField, Alert, Collapse } from "@mui/material";
+import { Box, Checkbox, Button, InputLabel, TextField, Alert, Collapse, ListItem, List, Link } from "@mui/material";
 import axios from "axios";
 import CheckIcon from '@mui/icons-material/Check';
 import { useEffect, useState } from "react";
@@ -12,8 +12,11 @@ export default function CourseEdit() {
     const [chapters, setChapters] = useState([]);
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState(0);
+    const [published, setPublished] = useState(false);
+    const [imgUrl, setImgUrl] = useState("");
     const [updated, setUpdated] = useState(false);
     const [error, setError] = useState(false);
+
 
     useEffect(() => {
         axios.get(`http://localhost:8080/courses/${courseId}`)
@@ -23,6 +26,8 @@ export default function CourseEdit() {
             setChapters(res.data.chapters);
             setTitle(res.data.title);
             setPrice(res.data.price);
+            setImgUrl(res.data.imgUrl);
+            setPublished(res.data.published);
         })
     }, [])
 
@@ -34,6 +39,8 @@ export default function CourseEdit() {
         formData.append("title", title);
         formData.append("description", description);
         formData.append("price", price);
+        formData.append("imgUrl", imgUrl);
+        formData.append("published", published);
         axios.put(`http://localhost:8080/courses/${courseId}`, formData)
         .then((response) => {
             console.log(response.data); // should return course
@@ -55,16 +62,25 @@ export default function CourseEdit() {
     return (
         <Box sx={{ display: "grid", gridTemplateColumns: "auto auto", gridGap: "1rem", padding: "2rem" }}>
                 <TextField label="Course title" value={title} required onChange={e => setTitle(e.currentTarget.value)} />
-                <Box>
-                    <p>Update Chapters here</p>
+                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                    <List>
+                        {
+                            chapters.map(chapter => {
+                                return (
+                                    <ListItem key={chapter.id}>
+                                        <Link href={`chapters/${chapter.id}/edit`}>{chapter.title}</Link>
+                                    </ListItem>
+                                )
+                            })
+                        }
+                    </List>
+                    <Button variant="contained" sx={{ textTransform: "none", marginLeft: "1em" }}>New chapter</Button>
                 </Box>
                 <TextField label="Course description" value={description} required onChange={e => setDescription(e.currentTarget.value)} />
-                <Box>
-                    <p>Update image here</p>
-                </Box>
+                <TextField label="Image URL" value={imgUrl} required onChange={e => setImgUrl(e.currentTarget.value)} />
                 <TextField label="Price SGD" type="number" value={price} required onChange={e => setPrice(e.currentTarget.value)} />
-                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Checkbox checked />
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
+                    <Checkbox checked={published} onClick={(e) => setPublished(!published)} />
                     <InputLabel>Publish Course</InputLabel>
                 </Box>
                 <Box sx={{ gridColumn: "1 / span 2" }}>

@@ -1,8 +1,9 @@
 import { Box, Checkbox, Button, InputLabel, TextField, Input } from "@mui/material";
 import React, { useState } from 'react';
 
-export default function ChapterEdit() {
+export default function ChapterEdit({ variant }) {
     const [file, setFile] = useState(null);
+    const isEdit = variant === "edit";
 
     const defaultXs = 2;
     return (
@@ -17,8 +18,18 @@ export default function ChapterEdit() {
                     <InputLabel>Publish Chapter</InputLabel>
                 </Box>
                 <Box sx={{ gridColumn: "1 / span 2" }}>
-                    <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }}>Update Chapter</Button>
-                    <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }}>Cancel</Button>
+                    {
+                        // Create chapter takes you to the chapter view. Update just displays success
+                        isEdit
+                        ? <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }}>Update Chapter</Button>
+                        : <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }}>Create Chapter</Button>
+                    }
+                    {
+                        // View chapter takes you to the chapter view. Cancel takes you back to course edit page
+                        isEdit
+                        ? <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }}>View Chapter</Button>
+                        : <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }}>Cancel</Button>
+                    }
                 </Box>
         </Box>
     )

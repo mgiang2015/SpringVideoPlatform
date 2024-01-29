@@ -51,10 +51,13 @@ const router = createBrowserRouter([
     element: <CourseEdit />
   }, {
     path: "/courses/:courseId/chapters/:chapterId/edit",
-    element: <ChapterEdit />
+    element: <ChapterEdit variant={"edit"}/>
   }, {
     path: "/courses/:courseId/chapters/:chapterId",
     element: <ChapterContent />
+  }, {
+    path: "/courses/:courseId/chapters/new",
+    element: <ChapterEdit variant={"new"}/>
   }
 ]);
 
