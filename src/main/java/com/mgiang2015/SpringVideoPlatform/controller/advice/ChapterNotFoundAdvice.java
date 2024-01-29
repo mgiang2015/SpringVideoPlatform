@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.mgiang2015.SpringVideoPlatform.exception.VideoNotFoundException;
+import com.mgiang2015.SpringVideoPlatform.exception.ChapterNotFoundException;
 
 @ControllerAdvice
-public class VideoNotFoundAdvice {
+public class ChapterNotFoundAdvice {
         
     @ResponseBody
-    @ExceptionHandler(VideoNotFoundException.class)
+    @ExceptionHandler(ChapterNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(VideoNotFoundException exception) {
+    String userNotFoundHandler(ChapterNotFoundException exception) {
         return exception.getMessage();
     }
 }

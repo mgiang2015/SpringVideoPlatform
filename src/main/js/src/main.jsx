@@ -13,6 +13,11 @@ import Upload from './pages/Upload.jsx';
 import Edit from './pages/Edit.jsx';
 import { CookiesProvider } from 'react-cookie';
 import SignIn from './pages/SignIn.jsx';
+import CreateCourse from './pages/CreateCourse.jsx';
+import CourseEdit from './pages/CourseEdit.jsx';
+import CourseContent from './pages/CourseContent.jsx';
+import ChapterEdit from './pages/ChapterEdit.jsx';
+import ChapterContent from './pages/ChapterContent.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +40,24 @@ const router = createBrowserRouter([
   }, {
     path: "/signin",
     element: <SignIn />,    
+  }, {
+    path: "/courses/create",
+    element: <CreateCourse />
+  }, {
+    path: "/courses/:courseId",
+    element: <CourseContent />
+  }, {
+    path: "/courses/:courseId/edit",
+    element: <CourseEdit />
+  }, {
+    path: "/courses/:courseId/chapters/:chapterId/edit",
+    element: <ChapterEdit variant={"edit"}/>
+  }, {
+    path: "/courses/:courseId/chapters/:chapterId",
+    element: <ChapterContent />
+  }, {
+    path: "/courses/:courseId/chapters/new",
+    element: <ChapterEdit variant={"new"}/>
   }
 ]);
 

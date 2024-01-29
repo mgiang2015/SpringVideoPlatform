@@ -27,7 +27,8 @@ public class SecurityConfig {
                     .requestMatchers("/login").permitAll() // No longer block /login
                     .requestMatchers("/error").permitAll()
                     .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                    .anyRequest().authenticated() // No requests will be forbidden, all requires authentication
+                    .anyRequest().permitAll() // for testing, no request requires authentication
+                    // .anyRequest().authenticated() // No requests will be forbidden, all requires authentication
                     // .requestMatchers("/users").hasAuthority("SCOPE_read:messages") // Forces app to have permission "read:messages" on auth0
                 )
                 .csrf(rf -> rf.disable())
