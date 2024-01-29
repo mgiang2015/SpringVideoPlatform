@@ -34,24 +34,23 @@ export default function CourseContent() {
     ]
 
     return (
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 5fr", gridGap: "0rem", padding: "1rem" }}>
+        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 5fr", gridGap: "1rem", padding: "1rem" }}>
             {/* Sidebar */}
             <Sidebar items={items} />
             {/* Course Banner / landing */}
             <Box>
                 <Box>
                     <Typography gutterBottom variant="h3">{title}</Typography>
-                    <Button sx={{ textTransform: "none" }} variant="contained">Enroll for SGD{price}</Button>
+                    <Button sx={{ textTransform: "none", margin: "1em" }} variant="contained">Enroll for SGD{price}</Button>
+                    <Button sx={{ textTransform: "none", margin: "1em" }} variant="contained" href={`/courses/${courseId}/edit`}>Edit Course</Button>
                 </Box>
                 {/* Create component for information section: title, divider and children and margin */}
-                <Box marginTop={"3em"}>
-                    <Typography gutterBottom variant="h4">Course Description</Typography>
-                    <Divider />
+                <Box marginTop={"3em"} sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                    <Typography gutterBottom variant="h4" sx={{ textDecoration: "underline" }}>Course Description</Typography>
                     <Typography>{description}</Typography>
                 </Box>
-                <Box marginTop={"3em"}>
-                    <Typography gutterBottom variant="h4">Chapters</Typography>
-                    <Divider />
+                <Box marginTop={"3em"} sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                    <Typography gutterBottom variant="h4" sx={{ textDecoration: "underline" }}>Chapters</Typography>
                     <List>
                         {
                             chapters.map(chapter => {
