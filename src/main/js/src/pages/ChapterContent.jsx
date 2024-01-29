@@ -38,7 +38,7 @@ export default function ChapterContent() {
                 <Typography gutterBottom variant="h3">{title}</Typography>
                 <Divider />
                 <Typography gutterBottom>{description}</Typography>
-                <VideoCard videoName={"Chapter 1: The Beninging"} videoUrl={""} />
+                <VideoCard videoName={title} videoUrl={`http://localhost:8080/chapters/${chapterId}/stream`} />
             </Box>
         </Box>
     )
