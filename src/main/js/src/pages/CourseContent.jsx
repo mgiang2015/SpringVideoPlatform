@@ -1,6 +1,5 @@
 import { Avatar, Box, Button, Card, CardContent, CardMedia, CardHeader, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Rating, Typography } from "@mui/material";
 import InboxIcon from '@mui/icons-material/Inbox';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Sidebar from "../components/Sidebar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
