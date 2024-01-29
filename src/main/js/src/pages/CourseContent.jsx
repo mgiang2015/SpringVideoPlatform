@@ -2,85 +2,70 @@ import { Avatar, Box, Button, Card, CardContent, CardMedia, CardHeader, Divider,
 import InboxIcon from '@mui/icons-material/Inbox';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Sidebar from "../components/Sidebar";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function CourseContent() {
+    let { courseId } = useParams();
+    const [description, setDescription] = useState("");
+    const [chapters, setChapters] = useState([]);
+    const [title, setTitle] = useState("");
+    const [price, setPrice] = useState(0);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/courses/${courseId}`)
+        .then(res => {
+            console.log(res.data);
+            setDescription(res.data.description);
+            setChapters(res.data.chapters);
+            setTitle(res.data.title);
+            setPrice(res.data.price);
+        })
+    }, [])
+
     const items = [
         {
             icon: <InboxIcon />,
-            text: "Overview"
+            text: "Description"
         }, {
             icon: <InboxIcon />,
-            text: "Curriculum"
-        }, {
-            icon: <InboxIcon />,
-            text: "Reviews"
+            text: "Chapters"
         }
     ]
+
     return (
-        <Box>
+        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 5fr", gridGap: "0rem", padding: "1rem" }}>
             {/* Sidebar */}
             <Sidebar items={items} />
             {/* Course Banner / landing */}
             <Box>
                 <Box>
-                    <Typography variant="h3">Komputing 4 Kids</Typography>
-                    <Typography>Le Minh Giang</Typography>
-                    <Button variant="contained">Enroll for SGD30</Button>
+                    <Typography gutterBottom variant="h3">{title}</Typography>
+                    <Button variant="contained">Enroll for SGD{price}</Button>
                 </Box>
                 {/* Create component for information section: title, divider and children and margin */}
                 <Box marginTop={"3em"}>
-                <Typography variant="h4">Course Overview</Typography>
-                <Divider />
-                <Typography>Lorem ipsum dolor sit amet, 
-                    consectetur adipiscing elit. 
-                    Vestibulum sit amet sapien nibh. 
-                    Fusce rhoncus diam vel tincidunt fermentum. 
-                    Curabitur fermentum eget nibh sed gravida. 
-                    Vivamus condimentum purus a nulla ultricies imperdiet. 
-                    Phasellus varius, augue sed bibendum euismod, 
-                    ipsum risus congue ante, eget interdum lectus lorem id massa. 
-                    Etiam eu ante ex. </Typography>
+                    <Typography gutterBottom variant="h4">Course Description</Typography>
+                    <Divider />
+                    <Typography>{description}</Typography>
                 </Box>
                 <Box marginTop={"3em"}>
-                    <Typography variant="h4">Curriculum</Typography>
+                    <Typography gutterBottom variant="h4">Chapters</Typography>
                     <Divider />
                     <List>
-                        <ListItem>
-                            <ListItemText>
-                                Chapter 1: The beninging
-                            </ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>
-                                Chapter 2: Exodus
-                            </ListItemText>
-                        </ListItem>
+                        {
+                            chapters.map(chapter => {
+                                return (
+                                <ListItem key={chapter.id}>
+                                    <ListItemText>
+                                        {chapter.title}
+                                    </ListItemText>
+                                </ListItem> 
+                                )
+                            })
+                        }
                     </List>
-                </Box>
-                <Box marginTop={"3em"}>
-                    <Typography variant="h4">Reviews</Typography>
-                    <Divider />
-                    {/* Create review card component */}
-                    <Card sx={{ maxWidth: 345 }}>
-                    <CardHeader
-                        avatar={
-                            <Avatar>
-                                R
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon />
-                            </IconButton>
-                        }
-                        title="Renaissance Remi"
-                        subheader="September 14, 2016"
-                    />
-                        <CardContent>
-                            <Rating value={5} readOnly size="medium" />
-                            <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sit amet sapien nibh</Typography>
-                        </CardContent>
-                    </Card>
                 </Box>
             </Box>
         </Box>
