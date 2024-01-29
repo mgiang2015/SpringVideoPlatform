@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, CardContent, CardMedia, CardHeader, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Rating, Typography } from "@mui/material";
+import { Avatar, Box, Button, Card, CardContent, CardMedia, CardHeader, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Rating, Typography, Link } from "@mui/material";
 import InboxIcon from '@mui/icons-material/Inbox';
 import Sidebar from "../components/Sidebar";
 import { useEffect, useState } from "react";
@@ -58,9 +58,9 @@ export default function CourseContent() {
                                 return (
                                 <ListItem key={chapter.id}>
                                     <ListItemText>
-                                        {chapter.title}
+                                        <Link href={`/courses/${courseId}/chapters/${chapter.id}`}>{chapter.title}</Link>
                                     </ListItemText>
-                                </ListItem> 
+                                </ListItem>
                                 )
                             })
                         }
