@@ -52,14 +52,19 @@ public class CourseController {
     }
 
     @PutMapping("courses/{id}")
-    public Course replaceCourse(@PathVariable Long id, @RequestBody Course newCourse) {
+    public Course replaceCourse(@PathVariable Long id, 
+                                @RequestParam(name = "title") String title,
+                                @RequestParam(name = "description") String description,
+                                @RequestParam(name = "price") Float price,
+                                @RequestParam(name = "imgUrl", defaultValue = "") String imgUrl,
+                                @RequestParam(name = "published", defaultValue = "false") boolean published) {
         return courseRepository.findById(id)
         .map(course -> {
-            course.setTitle(newCourse.getTitle());
-            course.setDescription(newCourse.getDescription());
-            course.setImgUrl(newCourse.getImgUrl());
-            course.setPrice(newCourse.getPrice());
-            course.setPublished(newCourse.getPublished());;
+            course.setTitle(title);
+            course.setDescription(description);
+            course.setImgUrl(imgUrl);
+            course.setPrice(price);
+            course.setPublished(published);
             return courseRepository.save(course);
         }).orElseThrow(() -> new CourseNotFoundException(id));
     }

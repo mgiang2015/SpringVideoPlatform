@@ -41,7 +41,7 @@ export default function CourseContent() {
             <Box>
                 <Box>
                     <Typography gutterBottom variant="h3">{title}</Typography>
-                    <Button variant="contained">Enroll for SGD{price}</Button>
+                    <Button sx={{ textTransform: "none" }} variant="contained">Enroll for SGD{price}</Button>
                 </Box>
                 {/* Create component for information section: title, divider and children and margin */}
                 <Box marginTop={"3em"}>
