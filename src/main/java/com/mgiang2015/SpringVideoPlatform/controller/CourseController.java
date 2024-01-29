@@ -28,9 +28,6 @@ public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
 
-    @Autowired
-    private VideoMongodbService service;
-
     @GetMapping("/courses")
     public List<Course> all() {
         return courseRepository.findAll();
