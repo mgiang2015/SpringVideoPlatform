@@ -58,7 +58,7 @@ export default function CourseContent() {
                                 return (
                                 <ListItem key={chapter.id}>
                                     <ListItemText>
-                                        <Link href={`/courses/${courseId}/chapters/${chapter.id}`}>{chapter.title}</Link>
+                                        <Link href={`chapters/${chapter.id}`}>{chapter.title}</Link>
                                     </ListItemText>
                                 </ListItem>
                                 )

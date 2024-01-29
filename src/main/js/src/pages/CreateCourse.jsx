@@ -1,12 +1,30 @@
 import { Button, TextField, Box } from "@mui/material";
-import { useState } from 'react';
+import axios from "axios";
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function CreateCourse() {
+    let navigate = useNavigate();
     const [title, setTitle] = useState("");
+    const [courseId, setCourseId] = useState(0);
 
-    const onSubmit = () => {
+    useEffect(() => {
+        if (courseId !== 0) {
+            navigate(`/courses/${courseId}/edit`)
+        }
+    }, [courseId])
+
+    const onSubmit = (e) => {
         // call createCourse window and jump to edit
         console.log(title);
+        e.preventDefault();
+        let formData = new FormData();
+        formData.append("title", title);
+        axios.post("http://localhost:8080/courses", formData)
+        .then((response) => {
+            console.log(response.data); // should return course
+            setCourseId(response.data.id);
+        })
     }
 
     return (
