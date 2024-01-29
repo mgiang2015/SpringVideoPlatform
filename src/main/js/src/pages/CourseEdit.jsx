@@ -74,7 +74,7 @@ export default function CourseEdit() {
                             })
                         }
                     </List>
-                    <Button variant="contained" sx={{ textTransform: "none", marginLeft: "1em" }}>New chapter</Button>
+                    <Button variant="contained" sx={{ textTransform: "none", marginLeft: "1em" }} href={`chapters/new`}>New chapter</Button>
                 </Box>
                 <TextField label="Course description" value={description} required onChange={e => setDescription(e.currentTarget.value)} />
                 <TextField label="Image URL" value={imgUrl} required onChange={e => setImgUrl(e.currentTarget.value)} />
