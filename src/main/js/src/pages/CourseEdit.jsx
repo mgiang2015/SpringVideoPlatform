@@ -1,8 +1,9 @@
-import { Box, Checkbox, Button, InputLabel, TextField, Alert, Collapse, ListItem, List, Link } from "@mui/material";
+import { Box, Checkbox, Button, InputLabel, TextField, Alert, Collapse, Link } from "@mui/material";
 import axios from "axios";
 import CheckIcon from '@mui/icons-material/Check';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import DataTable from "../components/DataTable";
 
 export default function CourseEdit() {
     let { courseId } = useParams();
@@ -17,6 +18,15 @@ export default function CourseEdit() {
     const [updated, setUpdated] = useState(false);
     const [error, setError] = useState(false);
 
+    const chapterColumns = [
+        {
+            field: "id", headerName: "ID", flex: 1
+        }, {
+            field: "title", headerName: "Title", flex: 1
+        }, {
+            field: "updatedDate", headerName: "Updated At", flex: 1
+        }
+    ]
 
     useEffect(() => {
         axios.get(`http://localhost:8080/courses/${courseId}`)
@@ -54,27 +64,30 @@ export default function CourseEdit() {
         })
     }
 
+    const handleRowClick = (params) => {
+        navigate(`/courses/${courseId}/chapters/${params.row.id}/edit`)
+    }
+
     const onCancel = (e) => {
         navigate(`/courses/${courseId}`)
     }
 
     const defaultXs = 2;
     return (
-        <Box sx={{ display: "grid", gridTemplateColumns: "auto auto", gridGap: "1rem", padding: "2rem" }}>
+        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: "1rem", padding: "2rem" }}>
                 <TextField label="Course title" value={title} required onChange={e => setTitle(e.currentTarget.value)} />
-                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-                    <List>
-                        {
-                            chapters.map(chapter => {
-                                return (
-                                    <ListItem key={chapter.id}>
-                                        <Link href={`chapters/${chapter.id}/edit`}>{chapter.title}</Link>
-                                    </ListItem>
-                                )
-                            })
+                <Box sx={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                    <DataTable sx={{ width: "100%" }} columns={chapterColumns} rows={chapters.map(
+                        chapter => {
+                            const updatedDate = new Date(chapter.updatedAt || chapter.createdAt);
+                            return {
+                                id: chapter.id,
+                                title: chapter.title,
+                                updatedDate: "" + updatedDate.getDate() + '-' + (updatedDate.getMonth() + 1) + '-' + updatedDate.getFullYear(),
+                            }
                         }
-                    </List>
-                    <Button variant="contained" sx={{ textTransform: "none", marginLeft: "1em" }} href={`chapters/new`}>New chapter</Button>
+                    )} onRowClick={handleRowClick} />
+                    <Button variant="contained" sx={{ textTransform: "none", marginTop: "1em" }} href={`chapters/new`}>New chapter</Button>
                 </Box>
                 <TextField label="Course description" value={description} required onChange={e => setDescription(e.currentTarget.value)} />
                 <TextField label="Image URL" value={imgUrl} required onChange={e => setImgUrl(e.currentTarget.value)} />

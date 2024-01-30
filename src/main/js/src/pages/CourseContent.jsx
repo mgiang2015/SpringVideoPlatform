@@ -42,7 +42,6 @@ export default function CourseContent() {
                 <Box>
                     <Typography gutterBottom variant="h3">{title}</Typography>
                     <Button sx={{ textTransform: "none", margin: "1em" }} variant="contained">Enroll for SGD{price}</Button>
-                    <Button sx={{ textTransform: "none", margin: "1em" }} variant="contained" href={`/courses/${courseId}/edit`}>Edit Course</Button>
                 </Box>
                 {/* Create component for information section: title, divider and children and margin */}
                 <Box marginTop={"3em"} sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
