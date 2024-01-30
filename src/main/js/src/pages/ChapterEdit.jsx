@@ -64,6 +64,20 @@ export default function ChapterEdit({ variant }) {
             } 
         })
     }
+
+    const onDelete = (e) => {
+        e.preventDefault();
+        axios.delete(`http://localhost:8080/chapters/${chapterId}`)
+        .then((response) => {
+            console.log(response.data);
+            navigate(`/courses/${courseId}/edit`);
+        }).catch((error) => {
+            if (error.response) {
+                setUpdated(false);
+                setError(true);
+            } 
+        })
+    }
     
     const isEdit = variant === "edit";
 
@@ -87,6 +101,12 @@ export default function ChapterEdit({ variant }) {
                         : <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }} onClick={onCreateSubmit}>Create Chapter</Button>
                     }
                     <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }} href={`/courses/${courseId}/edit`}>Back</Button>
+                    {
+                        // Create chapter takes you back to course edit. Update just displays success
+                        isEdit
+                        ? <Button variant="contained" color="error" sx={{ textTransform: "none", margin: "1em" }} onClick={onDelete}>Delete Chapter</Button>
+                        : <div></div>
+                    }
                 </Box>
                 <Collapse sx={{ gridColumn: "1 / span 2" }} in={updated}>
                     <Alert severity="success">
