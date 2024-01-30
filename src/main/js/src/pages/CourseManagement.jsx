@@ -36,7 +36,7 @@ export default function CourseManagement() {
     ]
 
     return (
-        <DataTable sx={{ width: "100%", marginTop: "2em" }} columns={courseColumns} rows={courses.map(
+        <DataTable sx={{ width: "100%", padding: "2em" }} columns={courseColumns} rows={courses.map(
             course => {
                 const updatedDate = new Date(course.updatedAt || course.createdAt);
                 return {
