@@ -11,22 +11,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.mgiang2015.SpringVideoPlatform.repository.ChapterRepository;
-import com.mgiang2015.SpringVideoPlatform.repository.CourseRepository;
-import com.mgiang2015.SpringVideoPlatform.services.VideoMongodbService;
-
-import jakarta.servlet.http.HttpServletResponse;
 
 import com.mgiang2015.SpringVideoPlatform.exception.ChapterNotFoundException;
 import com.mgiang2015.SpringVideoPlatform.exception.CourseNotFoundException;
 import com.mgiang2015.SpringVideoPlatform.model.Chapter;
 import com.mgiang2015.SpringVideoPlatform.model.Course;
 import com.mgiang2015.SpringVideoPlatform.model.VideoData;
+import com.mgiang2015.SpringVideoPlatform.repository.ChapterRepository;
+import com.mgiang2015.SpringVideoPlatform.repository.CourseRepository;
+import com.mgiang2015.SpringVideoPlatform.services.VideoMongodbService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class ChapterController {

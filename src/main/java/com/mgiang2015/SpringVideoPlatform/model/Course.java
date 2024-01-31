@@ -1,7 +1,7 @@
 package com.mgiang2015.SpringVideoPlatform.model;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,7 +12,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -37,13 +36,6 @@ public class Course {
     @OneToMany(cascade = CascadeType.ALL) // cascade delete
     @JoinColumn(name = "course_id") // join column will be in chapters table
     private List<Chapter> chapters = new ArrayList<>();
-    
-    // Bidirectional ManyToOne relationship
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Category category;
-    
-    // // Many to One - One creator can create many courses
-    // User creator
 
     public Long getId() {
         return id;

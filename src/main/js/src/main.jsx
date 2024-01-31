@@ -1,24 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import CssBaseline from '@mui/material/CssBaseline';
+import React from 'react';
+import { CookiesProvider } from 'react-cookie';
+import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import App from './App.jsx'
-import Browse from './pages/Browse.jsx'
-import Watch from './pages/Watch.jsx';
+import App from './App.jsx';
 import Layout from './Layout.jsx';
-import CssBaseline from '@mui/material/CssBaseline';
-import Upload from './pages/Upload.jsx';
-import Edit from './pages/Edit.jsx';
-import { CookiesProvider } from 'react-cookie';
-import SignIn from './pages/SignIn.jsx';
-import CreateCourse from './pages/CreateCourse.jsx';
-import CourseEdit from './pages/CourseEdit.jsx';
-import CourseContent from './pages/CourseContent.jsx';
-import ChapterEdit from './pages/ChapterEdit.jsx';
+import Browse from './pages/Browse.jsx';
 import ChapterContent from './pages/ChapterContent.jsx';
+import ChapterEdit from './pages/ChapterEdit.jsx';
+import CourseContent from './pages/CourseContent.jsx';
+import CourseEdit from './pages/CourseEdit.jsx';
 import CourseManagement from './pages/CourseManagement.jsx';
+import CreateCourse from './pages/CreateCourse.jsx';
+import SignIn from './pages/SignIn.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,16 +25,6 @@ const router = createBrowserRouter([
   {
     path: "/browse",
     element: <Browse />,
-  },
-  {
-    path: "/watch/:id",
-    element: <Watch />,
-  },{
-    path: "/upload",
-    element: <Upload />
-  }, {
-    path: "/edit/:id",
-    element: <Edit />,    
   }, {
     path: "/signin",
     element: <SignIn />,    

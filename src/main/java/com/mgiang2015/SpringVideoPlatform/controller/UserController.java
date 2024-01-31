@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mgiang2015.SpringVideoPlatform.exception.UserNotFoundException;
 import com.mgiang2015.SpringVideoPlatform.model.User;
 import com.mgiang2015.SpringVideoPlatform.repository.UserRepository;
-import com.mgiang2015.SpringVideoPlatform.exception.UserNotFoundException;
 
 @RestController
 public class UserController {

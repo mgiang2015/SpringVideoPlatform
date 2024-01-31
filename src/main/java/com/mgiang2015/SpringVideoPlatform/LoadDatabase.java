@@ -1,7 +1,7 @@
 package com.mgiang2015.SpringVideoPlatform;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +11,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.mgiang2015.SpringVideoPlatform.model.Chapter;
 import com.mgiang2015.SpringVideoPlatform.model.Course;
-import com.mgiang2015.SpringVideoPlatform.model.User;
 import com.mgiang2015.SpringVideoPlatform.repository.ChapterRepository;
 import com.mgiang2015.SpringVideoPlatform.repository.CourseRepository;
-import com.mgiang2015.SpringVideoPlatform.repository.UserRepository;
 
 @Configuration
 public class LoadDatabase {
