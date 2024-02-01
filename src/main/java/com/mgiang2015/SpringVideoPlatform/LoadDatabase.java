@@ -22,39 +22,38 @@ public class LoadDatabase {
     @Bean // We don't need this with persisting mysql database
     CommandLineRunner initCourseDb(CourseRepository courseRepo, ChapterRepository chapterRepo) {
         return args -> {
-            // Clear database first
-            chapterRepo.deleteAll();
-            courseRepo.deleteAll();
 
-            // Create chapters
-            List<Chapter> chapters = new ArrayList<>();
+            // check if courseRepo is empty. Only initialize if empty
+            if (courseRepo.findAll().isEmpty()) {
 
-            // Create 3 new chapters
-            Chapter chapter1 = new Chapter();
-            chapter1.setTitle("The beninging");
-            chapter1.setDescription("First chapter");
-            // chapters.add(chapterRepo.save(chapter1));
-            chapters.add(chapter1);
+                // Create chapters
+                List<Chapter> chapters = new ArrayList<>();
 
-            Chapter chapter2 = new Chapter();
-            chapter2.setTitle("Exodus");
-            chapter2.setDescription("Yes yes desc desc");
-            // chapters.add(chapterRepo.save(chapter2));
-            chapters.add(chapter2);
+                // Create 3 new chapters
+                Chapter chapter1 = new Chapter();
+                chapter1.setTitle("Chapter 1: What is Computer Science?");
+                chapter1.setDescription("This chapter describes the overall concept of Computer Science field, and why we learn it.");
+                chapters.add(chapter1);
 
-            Chapter chapter3 = new Chapter();
-            chapter3.setTitle("Once upon a Bean");
-            chapter3.setDescription("Jack the beanstalk enjoyer");
-            // chapters.add(chapterRepo.save(chapter3));
-            chapters.add(chapter3);
+                Chapter chapter2 = new Chapter();
+                chapter2.setTitle("Chapter 2: Environment Setup");
+                chapter2.setDescription("This chapter walks you through everything you need to set up on your computer to complete the hands-on exercises later on.");
+                chapters.add(chapter2);
 
-            // Update course
-            Course course = new Course();
-            course.setTitle("Komputer 4 Kids");
-            course.setDescription("Hello world and dynamic programming");
-            course.setPrice(Float.valueOf("45.55"));
-            course.setChapters(chapters);
-            courseRepo.save(course);
+                Chapter chapter3 = new Chapter();
+                chapter3.setTitle("Chapter 3: hello-world.py");
+                chapter3.setDescription("This chapter walks you through writing your first-ever python program, and run it successfully.");
+                chapters.add(chapter3);
+
+                // Update course
+                Course course = new Course();
+                course.setTitle("Computer Science for Beginners in Python");
+                course.setDescription("Your first steps towards Computer Science");
+                course.setPrice(Float.valueOf("50.00"));
+                course.setChapters(chapters);
+                courseRepo.save(course);
+                log.info("Created demo courses and chapters");
+            }
         };
     }
 }
