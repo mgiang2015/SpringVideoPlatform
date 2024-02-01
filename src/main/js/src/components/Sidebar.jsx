@@ -7,7 +7,7 @@ export default function Sidebar({ items }) {
                 items.map(item => {
                     return (
                         <ListItem key={item.text}>
-                            <ListItemButton>
+                            <ListItemButton href={item.href || "#"}>
                                 <ListItemIcon>
                                     {item.icon}
                                 </ListItemIcon>
