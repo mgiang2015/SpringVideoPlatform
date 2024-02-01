@@ -1,4 +1,4 @@
-import InboxIcon from '@mui/icons-material/Inbox';
+import PlayLessonIcon from '@mui/icons-material/PlayLesson';
 import { Box, Divider, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ export default function ChapterContent() {
     let { courseId, chapterId } = useParams();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [chapters, setChapters] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/chapters/${chapterId}`)
@@ -18,17 +19,21 @@ export default function ChapterContent() {
             setTitle(res.data.title);
             setDescription(res.data.description);
         })
+
+        axios.get(`http://localhost:8080/courses/${courseId}`)
+        .then(res => {
+            console.log(res.data);
+            setChapters(res.data.chapters);
+        })
     }, [])
 
-    const items = [
-        {
-            icon: <InboxIcon />,
-            text: "Description"
-        }, {
-            icon: <InboxIcon />,
-            text: "Video"
+    const items = chapters.map(chapter => {
+        return {
+            icon: <PlayLessonIcon />,
+            text: chapter.title,
+            href: `/courses/${courseId}/chapters/${chapter.id}`
         }
-    ]
+    })
 
     return (
         <Box sx={{ height: "100%", display: "grid", gridTemplateColumns: "1fr 5fr", gridGap: "0rem", padding: "1rem" }}>
