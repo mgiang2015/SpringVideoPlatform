@@ -97,20 +97,16 @@ public class ChapterController {
     }
 
     @DeleteMapping("/chapters/{id}")
-    public void deleteChapter(@RequestParam("courseId") Long courseId, @PathVariable Long id) throws IOException {
+    public void deleteChapter(@PathVariable Long id) throws IOException {
         // Delete from mongodb first
         Chapter c = repository.findById(id)
             .orElseThrow(() -> new ChapterNotFoundException(id));
-        service.deleteVideo(c.getVideoId());
-
+        
+        if (c.getVideoId() != null) {
+            service.deleteVideo(c.getVideoId());
+        }
+        
         repository.delete(c);
-
-        // unlink from course
-        courseRepository.findById(courseId)
-        .map(course -> {
-            course.removeChapterById(id);
-            return courseRepository.save(course);
-        }).orElseThrow(() -> new CourseNotFoundException(courseId));
     }
 
     @DeleteMapping("/chapters/all")

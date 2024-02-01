@@ -69,7 +69,21 @@ export default function CourseEdit() {
     }
 
     const onCancel = (e) => {
-        navigate(`/courses/${courseId}`)
+        navigate(`/courses/management`)
+    }
+
+    const onDelete = (e) => {
+        e.preventDefault();
+        axios.delete(`http://localhost:8080/courses/${courseId}`)
+        .then((response) => {
+            console.log(response.data);
+            navigate(`/courses/management`)
+        }).catch((error) => {
+            if (error.response) {
+                setUpdated(false);
+                setError(true);
+            } 
+        })
     }
 
     const defaultXs = 2;
@@ -99,6 +113,7 @@ export default function CourseEdit() {
                 <Box sx={{ gridColumn: "1 / span 2" }}>
                     <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }} onClick={onSubmit}>Update Course</Button>
                     <Button variant="contained" sx={{ textTransform: "none", margin: "1em" }} onClick={onCancel}>View Course</Button>
+                    <Button variant="contained" color="error" sx={{ textTransform: "none", margin: "1em" }} onClick={onDelete}>Delete Course</Button>
                 </Box>
                 <Collapse sx={{ gridColumn: "1 / span 2" }} in={updated}>
                     <Alert severity="success">
