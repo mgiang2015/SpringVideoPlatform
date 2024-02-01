@@ -1,8 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable from "../components/DataTable";
-import axios from "axios";
-import { Box } from "@mui/material";
 
 export default function CourseManagement() {
     let navigate = useNavigate();

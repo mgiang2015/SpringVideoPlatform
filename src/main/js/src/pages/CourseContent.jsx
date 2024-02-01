@@ -1,9 +1,9 @@
-import { Avatar, Box, Button, Card, CardContent, CardMedia, CardHeader, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Rating, Typography, Link } from "@mui/material";
 import InboxIcon from '@mui/icons-material/Inbox';
-import Sidebar from "../components/Sidebar";
+import { Box, Button, Link, List, ListItem, ListItemText, Typography } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import Sidebar from "../components/Sidebar";
 
 export default function CourseContent() {
     let { courseId } = useParams();

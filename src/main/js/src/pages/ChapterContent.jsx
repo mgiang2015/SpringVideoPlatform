@@ -1,10 +1,10 @@
-import { Typography, Box, Divider } from "@mui/material";
-import VideoCard from "../components/VideoCard";
 import InboxIcon from '@mui/icons-material/Inbox';
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Box, Divider, Typography } from "@mui/material";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import VideoCard from "../components/VideoCard";
 
 export default function ChapterContent() {
     let { courseId, chapterId } = useParams();

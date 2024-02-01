@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardMedia } from "@mui/material";
 
 export default function VideoCard({ videoName, videoUrl }) {
     return (

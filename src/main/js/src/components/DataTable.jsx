@@ -1,6 +1,4 @@
-import { Box } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
-import { useNavigate } from "react-router-dom";
 
 export default function DataTable({ columns, rows, sx, onRowClick }) {
     return (
